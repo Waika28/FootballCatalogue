@@ -1,0 +1,74 @@
+﻿@page
+@model FootballCatalogue.Pages.Players.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Player</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Player.FirstName" class="control-label"></label>
+                <input asp-for="Player.FirstName" class="form-control" />
+                <span asp-validation-for="Player.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.LastName" class="control-label"></label>
+                <input asp-for="Player.LastName" class="form-control" />
+                <span asp-validation-for="Player.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Sex" class="control-label"></label>
+                <select asp-for="Player.Sex" class="form-control">
+                    <option value="@Enums.Sex.Man">Man</option>
+                    <option value="@Enums.Sex.Woman">Woman</option>
+                </select>
+                <span asp-validation-for="Player.Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Birthday" class="control-label"></label>
+                <input asp-for="Player.Birthday" class="form-control" />
+                <span asp-validation-for="Player.Birthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Team" class="control-label"></label>
+                <input asp-for="Player.Team" list="teams" class="form-control" />
+                <datalist id="teams">
+                    @foreach (var team in @Model.Teams)
+                    {
+                        <option>@team</option>
+                    }
+                </datalist>
+                <span asp-validation-for="Player.Team" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Country" class="control-label"></label>
+                <select asp-for="Player.Country" class="form-control">
+                    <option value="Russia">Russia</option>
+                    <option value="USA">USA</option>
+                    <option value="Italy">Italy</option>
+                </select>
+                <span asp-validation-for="Player.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
